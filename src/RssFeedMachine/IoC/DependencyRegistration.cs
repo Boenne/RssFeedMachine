@@ -1,5 +1,6 @@
 ﻿using LightInject;
 using RssFeedMachine.ViewModels;
+using RssFeedMachine.ViewModels.Interfaces;
 
 namespace RssFeedMachine.IoC
 {
@@ -10,8 +11,20 @@ namespace RssFeedMachine.IoC
         public static void Register()
         {
             var serviceContainer = new ServiceContainer();
-            serviceContainer.Register<IMainViewModel, MainViewModel>();
+            RegisterViewModels(serviceContainer);
+            RegisterServices();
             Container = serviceContainer;
+        }
+
+        private static void RegisterViewModels(ServiceContainer serviceContainer)
+        {
+            serviceContainer.Register<IMainViewModel, MainViewModel>();
+            serviceContainer.Register<IFeedListViewModel, FeedListViewModel>();
+        }
+
+        private static void RegisterServices()
+        {
+            //TODO register services, repos and whatnot
         }
     }
 }
