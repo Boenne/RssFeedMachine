@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RssFeedMachine
+namespace RssFeedMachine.Windows
 {
     public partial class MainWindow : Window
     {
