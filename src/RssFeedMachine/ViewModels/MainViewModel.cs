@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using RssFeedMachine.ViewModels.Interfaces;
@@ -11,7 +12,7 @@ namespace RssFeedMachine.ViewModels
 
         public async Task Loaded()
         {
-            //TODO load data from repo
+            if (!File.Exists(Settings.DataFilePath)) await File.WriteAllTextAsync(Settings.DataFilePath, "[]");
         }
     }
 }
