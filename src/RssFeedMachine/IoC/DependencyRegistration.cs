@@ -1,7 +1,13 @@
 ﻿using LightInject;
+using RssFeedMachine.Data.Repositories;
+using RssFeedMachine.Data.Repositories.Interfaces;
+using RssFeedMachine.Services;
+using RssFeedMachine.Services.Interfaces;
 using RssFeedMachine.ViewModels;
 using RssFeedMachine.ViewModels.Interfaces;
 using RssFeedMachine.Wrappers;
+using RssFeedMachine.Wrappers.Interfaces;
+using RssFeedMachine.Wrappers.Messenger;
 
 namespace RssFeedMachine.IoC
 {
@@ -14,6 +20,7 @@ namespace RssFeedMachine.IoC
             var serviceContainer = new ServiceContainer();
             RegisterViewModels(serviceContainer);
             RegisterServices(serviceContainer);
+            RegisterRepositories(serviceContainer);
             Container = serviceContainer;
         }
 
@@ -27,6 +34,14 @@ namespace RssFeedMachine.IoC
         private static void RegisterServices(ServiceContainer serviceContainer)
         {
             serviceContainer.Register<IMessageBoxWrapper, MessageBoxWrapper>();
+            serviceContainer.Register<IDispatcherWrapper, DispatcherWrapper>();
+            serviceContainer.Register<IMessenger, Messenger>();
+            serviceContainer.Register<IFeedReaderService, FeedReaderService>();
+        }
+
+        private static void RegisterRepositories(ServiceContainer serviceContainer)
+        {
+            serviceContainer.Register<IFeedRepository, FeedRepository>();
         }
     }
 }
